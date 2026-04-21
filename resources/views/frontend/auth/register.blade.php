@@ -66,18 +66,39 @@
                             placeholder="+1 (555) 123-4567">
                     </div>
                     <div class="md:col-span-2">
-                        <label class="block text-lg font-semibold text-slate-800 mb-2">Password <span
-                                class="text-red-500">*</span></label>
-                        <input type="password" id="password" name="password" required minlength="8"
-                            class="w-full px-6 py-5 rounded-3xl border border-slate-300 focus:border-blue-600 focus:ring-4 focus:ring-blue-100 outline-none transition">
-                        <p class="text-sm text-slate-500 mt-2">Minimum 8 characters, include a number and symbol.
+                        <label class="block text-lg font-semibold text-slate-800 mb-2">
+                            Password <span class="text-red-500">*</span>
+                        </label>
+
+                        <div class="relative">
+                            <input type="password" id="password" name="password" required minlength="8"
+                                class="w-full px-6 py-5 rounded-3xl border border-slate-300 focus:border-blue-600 focus:ring-4 focus:ring-blue-100 outline-none transition">
+
+                            <button type="button" onclick="togglePassword('password', this)"
+                                class="absolute right-4 top-1/2 -translate-y-1/2 text-sm text-slate-600">
+                                Show
+                            </button>
+                        </div>
+
+                        <p class="text-sm text-slate-500 mt-2">
+                            Minimum 8 characters, include a number and symbol.
                         </p>
                     </div>
+
                     <div class="md:col-span-2">
-                        <label class="block text-lg font-semibold text-slate-800 mb-2">Confirm Password <span
-                                class="text-red-500">*</span></label>
-                        <input type="password" id="confirmPassword" name="confirm_password" required minlength="8"
-                            class="w-full px-6 py-5 rounded-3xl border border-slate-300 focus:border-blue-600 focus:ring-4 focus:ring-blue-100 outline-none transition">
+                        <label class="block text-lg font-semibold text-slate-800 mb-2">
+                            Confirm Password <span class="text-red-500">*</span>
+                        </label>
+
+                        <div class="relative">
+                            <input type="password" id="confirmPassword" name="confirm_password" required minlength="8"
+                                class="w-full px-6 py-5 rounded-3xl border border-slate-300 focus:border-blue-600 focus:ring-4 focus:ring-blue-100 outline-none transition">
+
+                            <button type="button" onclick="togglePassword('confirmPassword', this)"
+                                class="absolute right-4 top-1/2 -translate-y-1/2 text-sm text-slate-600">
+                                Show
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <div class="flex justify-between mt-12">
@@ -96,6 +117,16 @@
 
 @section('script')
     <script>
+        function togglePassword(id, btn) {
+            const input = document.getElementById(id);
+            if (input.type === "password") {
+                input.type = "text";
+                btn.innerText = "Hide";
+            } else {
+                input.type = "password";
+                btn.innerText = "Show";
+            }
+        }
         document.getElementById('proSignupForm').addEventListener('submit', function(e) {
             const pwd = document.getElementById('password').value;
             const confirm = document.getElementById('confirmPassword').value;
